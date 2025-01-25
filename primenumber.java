@@ -2,20 +2,20 @@ import java.util.Scanner;
 
 public class PrimeNumbers {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        try (Scanner scanner = new Scanner(System.in)) {
+			// Prompt user for an integer
+			System.out.print("Enter an integer: ");
+			int number = scanner.nextInt();
 
-        // Prompt user for an integer
-        System.out.print("Enter an integer: ");
-        int number = scanner.nextInt();
+			System.out.println("Prime numbers up to " + number + ":");
 
-        System.out.println("Prime numbers up to " + number + ":");
-
-        // Loop through numbers from 2 to the entered number
-        for (int i = 2; i <= number; i++) {
-            if (isPrime(i)) {
-                System.out.print(i + " ");
-            }
-        }
+			// Loop through numbers from 2 to the entered number
+			for (int i = 2; i <= number; i++) {
+			    if (isPrime(i)) {
+			        System.out.print(i + " ");
+			    }
+			}
+		}
     }
 
     // Method to check if a number is prime
