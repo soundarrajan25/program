@@ -1,0 +1,51 @@
+package TextFileAnalyzer;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+public class TextFileAnalyzer {
+	public static void main(String[] args) {
+
+	// Initialize counters
+	int characterCount = 0;
+	int wordCount = 0;
+	int lineCount = 0;
+
+	// Specify the path to the text file
+	String filePath = " your file path change this E:\\TextFileAnalyzer\\src\\TextFileAnalyzer\\data\\textfile.txt";
+			try {
+
+	// Open the file for reading
+	BufferedReader reader = new BufferedReader(new FileReader (filePath));
+	String line;
+
+	// Process each line
+	while ((line = reader.readLine()) != null) {
+		
+		// Increment line counter
+		lineCount++;
+
+		// Increment character counter
+		characterCount += line.length();
+		// Split the line into words and increment word counter
+		String[] words = line.split("\\s+");
+
+		wordCount += words.length;
+
+		}
+
+		// Close the file
+	reader.close();
+	
+
+		// Display the counts
+	System.out.println("Number of characters:" + characterCount);
+			System.out.println("Number of words: " + wordCount);
+			System.out.println("Number of lines:"+ lineCount);
+
+			} catch (IOException e) {
+
+			e.printStackTrace();
+			}
+	}
+}
