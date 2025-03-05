@@ -1,0 +1,35 @@
+package ExceptionDemo;
+public class ExceptionDemo {
+    public static void main(String[] args) {
+        // a) Arithmetic Exception
+        try {
+            int a = 10, b = 0;
+            int result = a / b; // Division by zero
+        } catch (ArithmeticException e) {
+            System.out.println("ArithmeticException: Division by zero is not allowed.");
+        }
+
+        // b) Number Format Exception
+        try {
+            String invalidNumber = "abc123";
+            int num = Integer.parseInt(invalidNumber);
+        } catch (NumberFormatException e) {
+            System.out.println("NumberFormatException: Invalid number format.");
+        }
+
+        // c) Array Index Out of Bound Exception
+        try {
+            int[] numbers = {1, 2, 3, 4, 5};
+            int invalidIndexValue = numbers[10];
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("ArrayIndexOutOfBoundsException: Invalid index accessed.");
+        }
+
+        // d) Negative Array Size Exception
+        try {
+            int[] invalidArray = new int[-5];
+        } catch (NegativeArraySizeException e) {
+            System.out.println("NegativeArraySizeException: Array size cannot be negative.");
+        }
+    }
+}
