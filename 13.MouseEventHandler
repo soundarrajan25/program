@@ -1,0 +1,87 @@
+package MouseEventHandler;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
+public class MouseEventHandler extends JFrame {
+    private String eventName = "";  // To store the name of the current event
+
+    public MouseEventHandler() {
+        // Set up the frame
+        setTitle("Mouse Event Handler");
+        setSize(400, 400);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
+
+        // Add mouse listener using adapter
+        addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                eventName = "Mouse Clicked";
+                repaint();
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+                eventName = "Mouse Pressed";
+                repaint();
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                eventName = "Mouse Released";
+                repaint();
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                eventName = "Mouse Entered";
+                repaint();
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                eventName = "Mouse Exited";
+                repaint();
+            }
+        });
+
+        addMouseMotionListener(new MouseAdapter() {
+            @Override
+            public void mouseDragged(MouseEvent e) {
+                eventName = "Mouse Dragged";
+                repaint();
+            }
+
+            @Override
+            public void mouseMoved(MouseEvent e) {
+                eventName = "Mouse Moved";
+                repaint();
+            }
+        });
+    }
+
+    @Override
+    public void paint(Graphics g) {
+        super.paint(g);
+        g.setFont(new Font("Arial", Font.BOLD, 24));
+        g.setColor(Color.BLACK);
+        int windowWidth = getWidth();
+        int windowHeight = getHeight();
+        FontMetrics fm = g.getFontMetrics();
+        int textWidth = fm.stringWidth(eventName);
+        int textHeight = fm.getHeight();
+        int x = (windowWidth - textWidth) / 2;
+        int y = (windowHeight + textHeight) / 2;
+        g.drawString(eventName, x, y);
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            MouseEventHandler frame = new MouseEventHandler();
+            frame.setVisible(true);
+        });
+    }
+}
