@@ -1,0 +1,68 @@
+
+package FontChanger;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class FontChanger extends JFrame implements ActionListener {
+    private JTextArea textArea;
+    private JComboBox<String> fontSizeComboBox, fontFamilyComboBox;
+    private JCheckBox boldCheckBox, italicCheckBox;
+
+    public FontChanger() {
+        // Set up the main window
+        setTitle("Font Changer");
+        setSize(500, 400);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
+        setLayout(new BorderLayout());
+
+        // Create a text area
+        textArea = new JTextArea("Enter your text here...");
+        textArea.setFont(new Font("Arial", Font.PLAIN, 14));
+        add(new JScrollPane(textArea), BorderLayout.CENTER);
+
+        // Create a control panel
+        JPanel controlPanel = new JPanel();
+        controlPanel.setLayout(new FlowLayout());
+
+        // Font Family Selection
+        String[] fonts = GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames();
+        fontFamilyComboBox = new JComboBox<>(fonts);
+        controlPanel.add(new JLabel("Font:"));
+        controlPanel.add(fontFamilyComboBox);
+
+        // Font Size Selection
+        fontSizeComboBox = new JComboBox<>(new String[]{"12", "14", "16", "18", "20", "24", "28", "32", "36"});
+        controlPanel.add(new JLabel("Size:"));
+        controlPanel.add(fontSizeComboBox);
+
+        // Bold & Italic Checkboxes
+        boldCheckBox = new JCheckBox("Bold");
+        italicCheckBox = new JCheckBox("Italic");
+        controlPanel.add(boldCheckBox);
+        controlPanel.add(italicCheckBox);
+
+        add(controlPanel, BorderLayout.NORTH);
+
+        // Add action listeners
+        fontFamilyComboBox.addActionListener(this);
+        fontSizeComboBox.addActionListener(this);
+        boldCheckBox.addActionListener(this);
+        italicCheckBox.addActionListener(this);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        String fontFamily = (String) fontFamilyComboBox.getSelectedItem();
+        int fontSize = Integer.parseInt((String) fontSizeComboBox.getSelectedItem());
+        int fontStyle = (boldCheckBox.isSelected() ? Font.BOLD : Font.PLAIN) | 
+                        (italicCheckBox.isSelected() ? Font.ITALIC : Font.PLAIN);
+        textArea.setFont(new Font(fontFamily, fontStyle, fontSize));
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> new FontChanger().setVisible(true));
+    }
+}
